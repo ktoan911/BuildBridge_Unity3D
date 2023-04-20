@@ -50,7 +50,6 @@ public class EnemyCtrl : Characters
         {
             currentState.OnExecute(this);
         }
-        Debug.Log(colorType + currentState.ToString());
         base.OnStartGame();
 
 
@@ -114,7 +113,7 @@ public class EnemyCtrl : Characters
         {
             if (Vector3.Distance(transform.position, finalPosition) < 1.5f)
             {
-                finalPosition = PLatformManager.Instance.listPlatform[PLatformManager.Instance.listPlatform.Count - 1].transform.position;
+                finalPosition = PLatformManager.Ins.listPlatform[PLatformManager.Ins.listPlatform.Count - 1].transform.position;
                 
             }
         }
@@ -136,7 +135,7 @@ public class EnemyCtrl : Characters
                 hitStair.collider.GetComponent<MeshRenderer>().enabled = true;
                 Destroy(listBrickCharacter[0]);
                 listBrickCharacter.RemoveAt(0);
-                finalPosition = PLatformManager.Instance.listPlatform[PLatformManager.Instance.listPlatform.Count - 1].transform.position;
+                finalPosition = PLatformManager.Ins.listPlatform[PLatformManager.Ins.listPlatform.Count - 1].transform.position;
             }
         }
     }
@@ -145,7 +144,7 @@ public class EnemyCtrl : Characters
     {
         if ((int)colorType + Tmp >= Stairs.Count)
         {
-            finalPosition = PLatformManager.Instance.listPlatform[PLatformManager.Instance.listPlatform.Count - 1].transform.position;
+            finalPosition = PLatformManager.Ins.listPlatform[PLatformManager.Ins.listPlatform.Count - 1].transform.position;
             return;
         }
             
@@ -172,7 +171,6 @@ public class EnemyCtrl : Characters
     //====Return colortype=====
     public override ColorType OnWin()
     {
-        Debug.Log(colorType);
         return this.colorType;
     }
 

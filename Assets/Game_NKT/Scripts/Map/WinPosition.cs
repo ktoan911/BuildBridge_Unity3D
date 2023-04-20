@@ -7,7 +7,7 @@ public class WinPosition : MonoBehaviour
 {
     private void Start()
     {
-        this.transform.position = PLatformManager.Instance.listPlatform[PLatformManager.Instance.listPlatform.Count - 1].transform.position;
+        this.transform.position = PLatformManager.Ins.listPlatform[PLatformManager.Ins.listPlatform.Count - 1].transform.position;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -21,6 +21,8 @@ public class WinPosition : MonoBehaviour
             }
 
             UIManager.Ins.OpenUI<EndGame>().SetupOnOpen(colorType);
+
+            GameManager.Ins.PauseGame();
 
         }
     }

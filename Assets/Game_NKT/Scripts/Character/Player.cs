@@ -54,6 +54,7 @@ public class Player : Characters
 
     private void GetInput()
     {
+        if (joystick == null) return;
         horizontal = joystick.Horizontal;
         vertical = joystick.Vertical;
     }
