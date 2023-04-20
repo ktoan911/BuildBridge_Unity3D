@@ -19,9 +19,9 @@ public class WinPosition : MonoBehaviour
             {
                 colorType = characters.OnWin();
             }
-            UIManager.Instance.SetWinner(ref colorType);
-            
-            GameManager.Instance.EndGame();
+
+            UIManager.Ins.OpenUI<EndGame>().SetupOnOpen(colorType);
+
         }
     }
 }

@@ -13,6 +13,10 @@ public class Player : Characters
     private float horizontal;
     private float vertical;
 
+    public void SetupJoyStick(FloatingJoystick floatingJoystick)
+    {
+        joystick = floatingJoystick;
+    }
 
     //=====StartGame=====
     private void SetGravity()

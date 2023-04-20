@@ -4,21 +4,18 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static GameManager instance;
-    public static GameManager Instance { get => instance;}
-
     private List<ColorType> listColor;
 
     private List<GameObject> listEnemy;
-
+    [SerializeField] private Player player;
     [SerializeField] private GameObject enemyPrefab;
     private GameObject enemy;
 
     private bool isPause;
     public bool IsPause { get => isPause; set => isPause = value; }
-
+    public Player Player { get => player; }
 
     private void Awake()
     {
@@ -26,7 +23,20 @@ public class GameManager : MonoBehaviour
 
         listEnemy = new List<GameObject>();
 
-        GameManager.instance= this;
+
+
+        Input.multiTouchEnabled = false;
+        Application.targetFrameRate = 60;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+        int maxScreenHeight = 1280;
+        float ratio = (float)Screen.currentResolution.width / (float)Screen.currentResolution.height;
+        if (Screen.currentResolution.height > maxScreenHeight)
+        {
+            Screen.SetResolution(Mathf.RoundToInt(ratio * (float)maxScreenHeight), maxScreenHeight, true);
+        }
+
+        UIManager.Ins.OpenUI<MainMenu>();
     }
     private void Start()
     {
@@ -58,16 +68,6 @@ public class GameManager : MonoBehaviour
             enemy = Instantiate(enemyPrefab, new Vector3(0, 5, 0), this.transform.rotation);
             listEnemy.Add(enemy);
         }
-    }
-
-    public void EndGame()
-    {
-        UIManager.Instance.EndGame();
-        if (UIManager.Instance.EndGame())
-        {
-            this.PauseGame();
-        }
-        
     }
 
     public void PauseGame()
